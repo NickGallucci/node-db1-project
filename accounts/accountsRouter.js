@@ -39,12 +39,6 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     try {
-        // send back info to the user through req.body will update all body content
-        // const payload = {
-        //     name: req.body.name,
-        //     budget: req.body.budget,
-        // }
-
         await db('accounts').where('id', req.params.id).update(req.body)
         return res.json(await db('accounts').where('id', req.params.id).first())
     }
@@ -57,7 +51,7 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
     try {
         await db('accounts').where('id', req.params.id).del()
-        return res.status(204).json(req.params.id) //req.params.id returns individual id deleted. 1 = successful, 0 = unsuccessful
+        return res.status(204).json(req.params.id)
     }
     catch (err) {
         next(err)
